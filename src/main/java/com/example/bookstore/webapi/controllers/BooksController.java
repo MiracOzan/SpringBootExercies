@@ -1,11 +1,10 @@
 package com.example.bookstore.webapi.controllers;
 
 import com.example.bookstore.business.abstracts.BookServices;
-import com.example.bookstore.entities.concretes.Book;
+import com.example.bookstore.business.request.CreateBooksRequest;
+import com.example.bookstore.business.response.GetAllBookResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,7 +19,12 @@ public class BooksController {
     }
 
     @GetMapping("/getAll")
-    public List<Book> getAll(){
+    public List<GetAllBookResponse> getAll(){
         return bookServices.getAll();
+    }
+
+    @PostMapping("/add")
+    public void add(@RequestBody() CreateBooksRequest createBooksRequest){
+        this.bookServices.add(createBooksRequest);
     }
 }
